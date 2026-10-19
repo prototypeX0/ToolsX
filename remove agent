@@ -1,0 +1,9 @@
+Stop-Service WazuhSvc -Force -ErrorAction SilentlyContinue
+
+$msi = Join-Path $env:TEMP "wazuh-agent"
+
+if (Test-Path $msi) {
+    msiexec.exe /x $msi /qn
+} else {
+    Write-Host "MSI not found. Use Settings > Apps > Installed apps to uninstall Wazuh Agent."
+}
