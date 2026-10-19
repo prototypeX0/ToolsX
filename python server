@@ -7,3 +7,9 @@ pip install flask
 sudo apt update
 sudo apt install python3-venv
 
+Create the Python server
+nano upload_server.py
+
+
+Paste this code:
+
