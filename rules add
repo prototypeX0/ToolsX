@@ -1,0 +1,27 @@
+<group name="windows_curl_file_transfer,">
+
+  <!-- Detect curl.exe execution -->
+  <rule id="100120" level="8">
+    <field name="win.system.eventID">^1$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\curl\.exe$</field>
+    <description>Windows Threat Hunting: curl.exe execution detected</description>
+    <group>windows,sysmon,curl_detection,</group>
+  </rule>
+
+  <!-- Detect potential file uploads using curl -->
+  <rule id="100121" level="10">
+    <if_sid>100120</if_sid>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)\bcurl(?:\.exe)?\b.*(?:-T|--upload-file|-F|--form)(?:\s|=)</field>
+    <description>Windows Threat Hunting: curl file upload option detected</description>
+    <group>windows,sysmon,curl_upload,</group>
+  </rule>
+
+  <!-- Detect potential file downloads using curl -->
+  <rule id="100122" level="8">
+    <if_sid>100120</if_sid>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)\bcurl(?:\.exe)?\b.*(?:-o|--output|-O|--remote-name)(?:\s|=)</field>
+    <description>Windows Threat Hunting: curl file download option detected</description>
+    <group>windows,sysmon,curl_download,</group>
+  </rule>
+
+</group>
