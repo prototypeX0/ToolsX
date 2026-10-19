@@ -12,3 +12,11 @@ Invoke-WebRequest -Uri https://packages.wazuh.com/4.x/windows/wazuh-agent-4.14.9
 run powershell
 sa victim WS at Fileserver
 Enable-PSRemoting -Force
+
+
+
+
+<localfile>
+  <location>Microsoft-Windows-Sysmon/Operational</location>
+  <log_format>eventchannel</log_format>
+</localfile>
